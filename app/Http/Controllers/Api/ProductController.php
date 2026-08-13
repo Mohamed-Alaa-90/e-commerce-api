@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductIndexRequest;
 use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
 
-    public function index(Request $request)
+    public function index(ProductIndexRequest $request)
     {
         $per_page = $request->input('per_page', 10);
         $products = Product::query()->select([
