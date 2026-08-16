@@ -17,8 +17,12 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
-            'admin' => \App\http\Middleware\AdminMiddleware::class
+            'admin' => \App\Http\Middleware\AdminMiddleware::class,
         ]);
+
+        $middleware->redirectGuestsTo(function () {
+            return route('admin.login');
+        });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function (ModelNotFoundException $e) {
